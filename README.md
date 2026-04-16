@@ -84,6 +84,58 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 jupyter notebook
 ```
 
+## TypeScript Agent Platform
+
+This repository now also contains a TypeScript workspace that turns the tutorial
+concepts into a reusable agent backend for:
+
+- a terminal CLI
+- a Next.js web app
+- a CopilotKit-connected frontend surface
+
+### Workspace layout
+
+- `packages/agent-core`: shared deep-agent runtime, tools, events, storage
+- `apps/cli`: terminal client
+- `apps/web`: Next.js app, SSE APIs, AG-UI bridge, CopilotKit shell
+
+### Additional environment variables
+
+```env
+AWS_REGION=ap-southeast-1
+AWS_PROFILE=your-aws-sso-profile
+BEDROCK_MODEL_ID=your-bedrock-inference-profile-id-or-arn
+BEDROCK_SUMMARIZER_MODEL_ID=your-bedrock-summarizer-model-or-profile
+TAVILY_API_KEY=your_tavily_api_key_here
+
+DEEP_AGENT_STORAGE_DRIVER=sqlite
+DEEP_AGENT_SQLITE_PATH=.deep-agent/threads.sqlite
+DEEP_AGENT_MAX_ITERATIONS=8
+DEEP_AGENT_MAX_SUBAGENT_DEPTH=1
+DEEP_AGENT_MAX_PARALLEL_SUBAGENTS=2
+
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+### Run the TypeScript apps
+
+```bash
+npm install
+
+# Web app
+npm run dev:web
+
+# CLI
+npm run dev:cli
+```
+
+The web app exposes:
+
+- `POST /api/chat` for direct SSE chat/event streaming
+- `GET /api/threads/:threadId/state` for thread state inspection
+- `POST /api/ag-ui` as an AG-UI compatible backend stream
+- `POST /api/copilotkit` as the CopilotKit-facing proxy route
+
 ## 📚 Tutorial Overview
 
 This repository contains five progressive notebooks that teach you to build advanced AI agents:

@@ -21,16 +21,10 @@ from typing_extensions import Annotated, Literal
 from deep_agents_from_scratch.prompts import SUMMARIZE_WEB_SEARCH
 from deep_agents_from_scratch.state import DeepAgentState
 
-# Summarization model
+# Summarization model 
 BEDROCK_REGION = os.getenv("AWS_REGION") or os.getenv("AWS_DEFAULT_REGION") or "ap-southeast-1"
-BEDROCK_MODEL_ID = os.getenv(
-    "BEDROCK_MODEL_ID",
-    "anthropic.claude-3-5-sonnet-20241022-v2:0",
-)
-summarization_model = init_chat_model(
-    model=f"bedrock_converse:{BEDROCK_MODEL_ID}",
-    region_name=BEDROCK_REGION,
-)
+BEDROCK_MODEL_ID = os.getenv("BEDROCK_MODEL_ID", "anthropic.claude-3-5-sonnet-20241022-v2:0")
+summarization_model = init_chat_model(model=f"bedrock_converse:{BEDROCK_MODEL_ID}", region_name=BEDROCK_REGION)
 tavily_client = TavilyClient()
 
 class Summary(BaseModel):

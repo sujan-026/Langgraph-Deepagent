@@ -1,0 +1,26 @@
+{
+  "name": "@deep-agents/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "deep-agent": "./dist/index.js"
+  },
+  "scripts": {
+    "prebuild": "npm --prefix ../../packages/agent-core run build",
+    "build": "tsc -p tsconfig.json",
+    "predev": "npm --prefix ../../packages/agent-core run build",
+    "dev": "tsx src/index.ts chat",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@deep-agents/agent-core": "0.1.0",
+    "commander": "^13.1.0",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}
